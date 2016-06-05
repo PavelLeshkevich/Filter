@@ -102,18 +102,18 @@ public class Filter {
                     continue;
                 }
                 count++;
-                process(line);
+                conversionLine(line);
             }
 
             count = 0;
-            push();
+            pushInNewFile();
 
         } catch (IOException e) {
             log.info(e.getMessage());
         }
     }
 
-    private void process(String line) {
+    private void conversionLine (String line) {
         String name, type, weight;
 
         int index = line.indexOf(constFirst) + constFirst.length() + 1;
@@ -129,11 +129,11 @@ public class Filter {
 
         if (count >= memorySize) {
             count = 0;
-            push();
+            pushInNewFile();
         }
     }
 
-    private void push() {
+    private void pushInNewFile() {
         Collections.sort(data);
         cleanDefect(data);
         try {
